@@ -1,0 +1,25 @@
+.App {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	justify-content:center;
+}
+
+.inputs {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	margin-bottom:20px;
+}
+.outputs {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+input {
+	margin: 5px 0 5px 0;
+	width: 100%;
+	height: 40px;
+}
