@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "주파 계산기",
+  "name": "주파 계산기",
   "icons": [
     {
       "src": "favicon.ico",
