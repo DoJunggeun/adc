@@ -1,7 +1,7 @@
 {
   "main.css": "/adc/static/css/main.000a9b3e.chunk.css",
-  "main.js": "/adc/static/js/main.762579e2.chunk.js",
-  "main.js.map": "/adc/static/js/main.762579e2.chunk.js.map",
+  "main.js": "/adc/static/js/main.fcef30c8.chunk.js",
+  "main.js.map": "/adc/static/js/main.fcef30c8.chunk.js.map",
   "static/js/1.e5125bdd.chunk.js": "/adc/static/js/1.e5125bdd.chunk.js",
   "static/js/1.e5125bdd.chunk.js.map": "/adc/static/js/1.e5125bdd.chunk.js.map",
   "runtime~main.js": "/adc/static/js/runtime~main.e081aa2a.js",
@@ -10,6 +10,6 @@
   "static/media/tire.png": "/adc/static/media/tire.65005606.png",
   "static/media/1.png": "/adc/static/media/1.1af58619.png",
   "index.html": "/adc/index.html",
-  "precache-manifest.b3fd994a546ea2657bf7ed52638b5ca9.js": "/adc/precache-manifest.b3fd994a546ea2657bf7ed52638b5ca9.js",
+  "precache-manifest.8983574ba82984b2d6a7e7e1f0ea2f29.js": "/adc/precache-manifest.8983574ba82984b2d6a7e7e1f0ea2f29.js",
   "service-worker.js": "/adc/service-worker.js"
 }
