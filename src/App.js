@@ -146,7 +146,7 @@ class App extends Component {
 			if (
 			// eslint-disable-next-line no-restricted-globals
 				confirm(
-					'8월 주파부터 사용하려면 7월 마지막 운행시 주파를 입력해주셔야 결과가 정상적으로 출력됩니다!'
+					'올바른 사용법\n\n1.홈 화면에 추가해서 사용해주세요!\n동일한 방식으로 접속하셔야 데이터가 잘 저장됩니다ㅎㅎ \n2.저번 달 마지막 주파를 입력해주셔야\n일간, 월간 누적 주파가 정상적으로 출력됩니다!\n\n확인을 누르시면 다시 표시되지 않습니다.'
 				)
 			) {
 				localStorage.setItem('welcome', 'done');
@@ -163,6 +163,7 @@ class App extends Component {
 		}
 		return (
 			<div className="App">
+				<p style={{margin:0, fontSize:10, position:'fixed', right:0, top:0}}>made by 도정근</p>
 				<div className="App-header">
 					<img src={logo} alt="logo" className="headerimage" />
 					<h2>주파 계산기</h2>
