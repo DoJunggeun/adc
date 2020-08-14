@@ -171,8 +171,8 @@ class App extends Component {
 				</div>
 				<button
 					style={{
-						height: 32,
-						width: 50,
+						height: 28,
+						width:56 ,
 						fontSize: '0.7rem',
 						position: 'absolute',
 						top: 20,
