@@ -36,7 +36,7 @@ input {
 	justify-content: space-evenly;
 }
 .logo {
-	animation: App-logo-spin infinite 2s linear;
+	animation: App-logo-spin infinite 1.5s linear;
 }
 @keyframes App-logo-spin {
   from {

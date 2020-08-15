@@ -2,6 +2,8 @@ import React, { Component, Fragment, useState } from 'react';
 import './App.css';
 import tire from './tire.png';
 import logo from './1.png';
+import del from './delete.png';
+import edit from './edit.png';
 
 class App extends Component {
 	constructor(props) {
@@ -11,6 +13,7 @@ class App extends Component {
 			acd: '',
 			dest: '용인',
 			monthDisplay: '',
+			editDisplay:false,
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -90,19 +93,17 @@ class App extends Component {
 				}
 				if (this.state.date > data[i][0]) {
 					if (data[i][2] >= acd) {
-						if (data[i][2] >= acd) {
-							alert(
-								date.substr(5, 2) +
-									'/' +
-									date.substr(8, 2) +
-									'의 누적 주행거리는' +
-									data[i][0].substr(5, 2) +
-									'/' +
-									data[i][0].substr(8, 2) +
-									'의 누적 주행거리보다 커야합니다! '
-							);
-							return;
-						}
+						alert(
+							date.substr(5, 2) +
+								'/' +
+								date.substr(8, 2) +
+								'의 누적 주행거리는' +
+								data[i][0].substr(5, 2) +
+								'/' +
+								data[i][0].substr(8, 2) +
+								'의 누적 주행거리보다 커야합니다! '
+						);
+						return;
 					}
 				}
 				if (this.state.date < data[i][0]) {
@@ -155,6 +156,14 @@ class App extends Component {
 				localStorage.setItem('welcome', 'not yet');
 				return true;
 			}
+		}
+	}
+	editButton() {
+		if (this.state.editDisplay === false) {
+			this.setState({editDisplay:true})	
+		}
+		if (this.state.editDisplay === true) {
+			this.setState({editDisplay:false})	
 		}
 	}
 	render() {
@@ -217,7 +226,7 @@ class App extends Component {
 				</div>
 				<div
 					style={{
-						display: 'flex',
+						display: 'relative',
 						width: '100%',
 						justifyContent: 'center',
 						paddingBottom: 10,
@@ -226,7 +235,7 @@ class App extends Component {
 					<select
 						name="monthDisplay"
 						value={this.state.monthDisplay}
-						style={{ height: 30, width: '30%', fontSize: '1rem', textAlign: 'center' }}
+						style={{ height: 30, width: '30%', fontSize: '1rem', textAlign: 'center', margin:'auto' }}
 						onChange={this.handleChange}
 					>
 						<option value="01">1월 주파</option>
@@ -242,10 +251,18 @@ class App extends Component {
 						<option value="11">11월 주파</option>
 						<option value="12">12월 주파</option>
 					</select>
+					<button style={{height: 28, width:56, fontSize: '0.8rem', position: 'absolute', right:10}} onClick={() => this.editButton()}>
+						{this.state.editDisplay ? '완료' : '수정'}
+					</button>
+
 				</div>
+				
+
+				
 				<div className="outputs">
-					<Output month={this.state.monthDisplay} />
+					<Output month={this.state.monthDisplay} editDisplay={this.state.editDisplay}/>
 				</div>
+				<p style={{fontSize:9, marginTop:50, marginBotton:0}}>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
 			</div>
 		);
 	}
@@ -255,6 +272,7 @@ export default App;
 
 function Output(props) {
 	const forceUpdate = useForceUpdate();
+	let editDisplay = props.editDisplay;
 	const month = props.month;
 	let fullDatas = JSON.parse(localStorage.getItem('distances'));
 	if (fullDatas == null || fullDatas == undefined || fullDatas == '') {
@@ -262,7 +280,7 @@ function Output(props) {
 			<Fragment>
 				<table
 					border="1px solid black"
-					width="360"
+					width="360px"
 					align="center"
 					style={{ fontSize: '0.9rem' }}
 				>
@@ -296,7 +314,7 @@ function Output(props) {
 			<Fragment>
 				<table
 					border="1px solid black"
-					width="360"
+					width="360px"
 					align="center"
 					style={{ fontSize: '0.9rem' }}
 				>
@@ -336,14 +354,26 @@ function Output(props) {
 					{data[3]} / {data[4]}
 				</td>
 				<td>{data[2]}</td>
-				<button
-					onClick={() => {
-						deleteData(data[0]);
-						forceUpdate();
-					}}
-				>
-					del
-				</button>
+				<td style={{display: editDisplay ? 'flex' : 'none', width:48, justifyContent:'space-evenly', border:'0px'}}>
+					<img
+						src={edit}
+						alt={'수정'}
+						style={{width:24}}
+						onClick={() => {
+							editData(data[0]);
+							forceUpdate();
+						}}
+					/>
+					<img
+						src={del}
+						alt={'삭제'}
+						style={{width:24}}
+						onClick={() => {
+							deleteData(data[0]);
+							forceUpdate();
+						}}
+					/>
+				</td>
 			</tr>
 		));
 	}
@@ -352,7 +382,7 @@ function Output(props) {
 		<Fragment>
 			<table
 				border="1px solid black"
-				width="360"
+				width="360px"
 				align="center"
 				style={{ fontSize: '0.9rem' }}
 			>
@@ -361,6 +391,7 @@ function Output(props) {
 					<th>행선지</th>
 					<th>일간/월간</th>
 					<th>누적</th>
+					<th style={{display:editDisplay ? 'block' : 'none', border:'0px'}}> </th>
 				</tr>
 				{list}
 			</table>
@@ -379,18 +410,87 @@ function yoil(day) {
 }
 
 function deleteData(date) {
-	console.log('clicked');
-	let fullDatas = JSON.parse(localStorage.getItem('distances'));
-	for (let i = 0; i < fullDatas.length; i++) {
-		console.log('for');
-		if (fullDatas[i][0] === date) {
-			console.log('if');
-			fullDatas.splice(i, 1);
-			localStorage.setItem('distances', JSON.stringify(fullDatas));
-			return;
+	// eslint-disable-next-line no-restricted-globals
+	if (confirm(date.substr(5,2)+'/'+date.substr(8,2)+'의 주행 기록을 삭제하시겠습니까?')) {
+		let fullDatas = JSON.parse(localStorage.getItem('distances'));
+		for (let i = 0; i < fullDatas.length; i++) {
+			if (fullDatas[i][0] === date) {
+				fullDatas.splice(i, 1);
+				localStorage.setItem('distances', JSON.stringify(fullDatas));
+				alert('삭제되었습니다');
+				return;
+			}
 		}
+	} else {
+		alert('취소되었습니다');
+	}
+
+}
+
+function editData(date) {
+	let data;
+	let newDestination;
+	let newDistance;
+	let editIndex;
+	// eslint-disable-next-line no-restricted-globals
+	if (confirm(date.substr(5,2)+'/'+date.substr(8,2)+'의 주행 기록을 수정하시겠습니까?')) {
+		let fullDatas = JSON.parse(localStorage.getItem('distances'));
+		for (let i = 0; i < fullDatas.length; i++) {
+			if (fullDatas[i][0] === date) {
+				data = fullDatas[i];
+				editIndex = i;
+				// eslint-disable-next-line no-restricted-globals
+				newDestination = prompt(data[0].substr(5,2)+'/'+data[0].substr(8,2)+'의 행선지는?', data[1]);
+				// eslint-disable-next-line no-restricted-globals
+				newDistance = prompt(data[0].substr(5,2)+'/'+data[0].substr(8,2)+'의 누적 주행거리는?', data[2]);
+				break;
+			}
+		}
+		
+		// for (let i = 0; i < fullDatas.length; i++) {
+		// 	if (this.state.date > fullDatas[i][0]) {
+		// 		if (fullDatas[i][2] >= newDistance) {
+		// 			alert(
+		// 				data[0].substr(5, 2) +
+		// 					'/' +
+		// 					data[0].substr(8, 2) +
+		// 					'의 누적 주행거리는' +
+		// 					fullDatas[i][0].substr(5, 2) +
+		// 					'/' +
+		// 					fullDatas[i][0].substr(8, 2) +
+		// 					'의 누적 주행거리보다 커야합니다! '
+		// 			);
+		// 			return;
+		// 		}
+		// 	}
+		// 	if (this.state.date < fullDatas[i][0]) {
+		// 		if (fullDatas[i][2] <= newDistance) {
+		// 			alert(
+		// 				data[0].substr(5, 2) +
+		// 					'/' +
+		// 					data[0].substr(8, 2) +
+		// 					'의 누적 주행거리는' +
+		// 					fullDatas[i][0].substr(5, 2) +
+		// 					'/' +
+		// 					fullDatas[i][0].substr(8, 2) +
+		// 					'의 누적 주행거리보다 작아야합니다! '
+		// 			);
+		// 			return;
+		// 		}
+		// 	}
+		// }
+		
+		
+		fullDatas.splice(editIndex,1,[data[0], newDestination, newDistance])
+		localStorage.setItem('distances', JSON.stringify(fullDatas));
+		alert('반영되었습니다');
+		return;
+
+	} else {
+		alert('취소되었습니다');
 	}
 }
+
 
 function useForceUpdate() {
 	const [value, setValue] = useState(0); // integer state
