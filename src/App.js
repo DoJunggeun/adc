@@ -354,11 +354,11 @@ function Output(props) {
 					{data[3]} / {data[4]}
 				</td>
 				<td>{data[2]}</td>
-				<td style={{display: editDisplay ? 'flex' : 'none', width:48, justifyContent:'space-evenly', border:'0px'}}>
+				<td style={{display: editDisplay ? 'flex' : 'none', border:'0px'}}>
 					<img
 						src={edit}
 						alt={'수정'}
-						style={{width:24}}
+						style={{width:26, height:26, margin:'auto'}}
 						onClick={() => {
 							editData(data[0]);
 							forceUpdate();
@@ -367,7 +367,7 @@ function Output(props) {
 					<img
 						src={del}
 						alt={'삭제'}
-						style={{width:24}}
+						style={{width:26, height:26, margin:'auto'}}
 						onClick={() => {
 							deleteData(data[0]);
 							forceUpdate();
@@ -389,7 +389,7 @@ function Output(props) {
 				<tr>
 					<th>날짜</th>
 					<th>행선지</th>
-					<th>일간/월간</th>
+					<th>일간 / 월간</th>
 					<th>누적</th>
 					<th style={{display:editDisplay ? 'block' : 'none', border:'0px'}}> </th>
 				</tr>
