@@ -25,6 +25,8 @@ class App extends Component {
 		let month = today.getMonth() + 1;
 		if (month < 10) {
 			month = '0' + month;
+		} else {
+			month = ''+month;
 		}
 		let date = today.getDate();
 		if (date < 10) {
