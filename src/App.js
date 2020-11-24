@@ -302,8 +302,7 @@ function Output(props) {
 	for (let i = 0; i < fullDatas.length; i++) {
 		if (fullDatas[i][0].substr(5, 2) === month) {
 			datas.push(fullDatas[i]);
-		}
-		if (fullDatas[i][0].substr(5, 2) === '0' + (month - 1)) {
+		} else if ( fullDatas[i][0].substr(5, 2) == month - 1 ) {
 			lastacd = fullDatas[i][2];
 		}
 	}
