@@ -432,6 +432,7 @@ function editData(date) {
 	let data;
 	let newDestination;
 	let newDistance;
+	let newDate;
 	let editIndex;
 	// eslint-disable-next-line no-restricted-globals
 	if (confirm(date.substr(5,2)+'/'+date.substr(8,2)+'의 주행 기록을 수정하시겠습니까?')) {
@@ -440,6 +441,8 @@ function editData(date) {
 			if (fullDatas[i][0] === date) {
 				data = fullDatas[i];
 				editIndex = i;
+				// eslint-disable-next-line no-restricted-globals
+				newDate = prompt(data[0].substr(5,2)+'/'+data[0].substr(8,2)+'의 주파가 맞나요?', data[0]);
 				// eslint-disable-next-line no-restricted-globals
 				newDestination = prompt(data[0].substr(5,2)+'/'+data[0].substr(8,2)+'의 행선지는?', data[1]);
 				// eslint-disable-next-line no-restricted-globals
@@ -482,7 +485,7 @@ function editData(date) {
 		// }
 		
 		
-		fullDatas.splice(editIndex,1,[data[0], newDestination, newDistance])
+		fullDatas.splice(editIndex,1,[newDate, newDestination, newDistance])
 		localStorage.setItem('distances', JSON.stringify(fullDatas));
 		alert('반영되었습니다');
 		return;
